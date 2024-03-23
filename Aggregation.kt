@@ -1,20 +1,23 @@
-class Patient(val name: String) {
-    fun doctorList(d: Doctor){
-        println("Patient: $name, Doctor: ${d.name}")
+class Pond(_name: String, _member: MutableList<Duck>){
+    val name: String = _name
+    val members: MutableList<Duck> = _member
+    constructor(_name: String): this(_name, mutableListOf<Duck>())
+}
+class Duck(val name: String)
+
+fun main(){
+    val pond = Pond("myFavorite")
+    val duck1 = Duck("Duck1")
+    val duck2 = Duck("Duck2")
+
+    pond.members.add(duck1)
+    pond.members.add(duck2)
+
+    for (duck in pond.members){
+        println(duck.name)
     }
 }
 
-class Doctor(val name: String){
-    fun patientList(p: Patient){
-        println("Doctor: $name, Patient: ${p.name}")
-    }
-}
-fun main(){
-    val doctor1 = Doctor("Kimsabu")
-    val patient1 = Patient("Kildong")
-    patient1.doctorList(doctor1)
-    doctor1.patientList(patient1)
-}
-//서로 독립적인 생명 주기를 가짐
-//이 코드에서는 두 클래스가 서로의 객체를 참조하고 있으므로 양방향 참조를 가짐
-//단방향이든, 양방향이든 각각의 각체의 생명주기에 영향을 주지 않을 때 연관관계라고 함
+//집합(Aggregation) 관계
+// 연관 관계와 거의 비슷하지만 특정 객체를 소유한다는 개념 추가
+// 오리가 특정 연못을 주거지로 삼는다면 연못이 오리를 소유할 수 있음
